@@ -228,7 +228,7 @@ https://www.acmicpc.net/problem/19532
     
     너무 완전 탐색으로 접근 하는 거 같아서 다른 방법을 찾아보니, 아래처럼 X자 모양으로 수를 곱한 뒤 나눠지면 쉽게 x, y값을 구할 수 있다고 합니다.
     
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0c823b63-9ed7-4c88-814d-e272c9463b7d/1e4d1e00-b50b-4e16-8b01-55f82a0c0faa/image.png)
+    ![image](https://github.com/user-attachments/assets/b32a49a3-dcf8-4592-b150-edd7925be3dc)
     
     출처: https://ssafy-story.tistory.com/68
     
