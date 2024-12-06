@@ -121,7 +121,7 @@ public class Main {
             if (sumNum == N) { 
                 result = M;
                 System.out.println(result);
-                break;
+                return;
             }
             // 결과 출력 (0은 생성자가 없는 경우)
             if (M == N) {
