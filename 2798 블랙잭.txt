@@ -1,0 +1,66 @@
+2798 블랙잭
+
+카드의개수, 목표 숫자가 주어지고
+카드들이 공개가 된다
+목표숫자에 최대한 가깝도록 카드3개를 뽑아 카드의 합을 출력한다.
+
+솔루션
+카드 3개를 고르는 모든 경우를 확인하여, 최댓값이 목표숫자에 가까운 조합을 고른다.
+3중for문을 사용했다. 
+카드개수가 100개 이하이므로 1,000,000로 시간제한을 넘어가지 않기 때문에 진행했다.(1억번 연산이 1초)
+또한 최댓값을 계속 갱신해야 했기때문에 파이썬처럼 max함수가 있나 찾아보았다.
+
+-여러개의 정수중 max값 구하기
+int max = IntStream.of(1, 2, 3).max().orElseThrow();
+
+-배열중 max값 구하기
+int[] numbers = {5, 8, 12, 7, 3};
+int max = Arrays.stream(numbers).max().orElse(0);
+
+-리스트에서 max값 구하기
+List<Integer> numbers = Arrays.asList(5, 8, 12, 7, 3);
+int max = Collections.max(numbers);
+
+
+하지만 이번 문제의 경우 2개의 값만 비교해도 되기때문에
+Math.max(a,b)를 사용하였다.
+
+
+
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        int[] nums = new int[n];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            nums[i] = Integer.parseInt(st.nextToken());
+        }
+        int sum = 0;
+        int cur = 0;
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = i + 1; j < n - 1; j++) {
+                for (int k = j + 1; k < n; k++) {
+                    cur = nums[i] + nums[j] + nums[k];
+                    if (cur <= m) {
+                        sum = Math.max(cur, sum);
+                    }
+                }
+            }
+        }
+
+        System.out.println(sum);
+    }
+
+}

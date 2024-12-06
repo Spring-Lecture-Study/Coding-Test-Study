@@ -1,0 +1,41 @@
+2231 분해합
+
+어떤 숫자 n이 주어졌을때, 가장 작은 생성자를 구하는 문제이다.
+
+어떤 자연수의 분해합은 그 자연수와 각자리수의 숫자의 합이다.
+그 자연수는 분해합의 생성자이다.
+
+각자리수를 구하는방법은 문자열로 바꾸거나 10으로 계속 나누어 나머지를 구해주는 방법이 있다.
+나는 10으로 나누는 방법을 선택했다.
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
+	//답이 없을수도 있으니 0으로 초기화
+        int ans = 0;
+        for (int i = 1; i < n; i++) {
+            int num=i;
+            int sum=i;
+            while(num>0){
+                sum+=num%10;
+                num/=10;
+            }
+            if(sum==n){
+                ans=i;
+                break;
+            }
+        }
+
+        System.out.println(ans);
+    }
+
+}

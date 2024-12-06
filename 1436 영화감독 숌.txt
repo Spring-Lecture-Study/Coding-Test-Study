@@ -1,0 +1,33 @@
+1436 영화감독 숌
+
+시리즈영화 제목을 666이 들어가있는 숫자로 만든다.
+1편은 666 2편은 1666 이런식으로 지을것이다.
+n번째 영화의 제목에 들어간 숫자를 출력해야한다.
+
+n은 10000이하의 자연수이다. 따라서 간단히 생각해보면 1666~10,000,666이렇게만 생각해봐도 10000개는 충분하다
+따라서 1억을 넘지 않아 1초미만이기때문에 숫자를 1개씩올려가며 666을 포함하는지 확인해본다.
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(br.readLine());
+        int num=666;
+        int cnt =1 ;
+        while(cnt!=n){
+            num++;
+            if(String.valueOf(num).contains("666")){
+                cnt++;
+            }
+        }
+        System.out.println(num);
+    }
+
+}

@@ -1,0 +1,36 @@
+19532 수학은 비대면강의입니다
+
+연립2차방정식이 주어지면 해당 방정식을 만족하는 x,y를 출력하는 문제이다.
+처음에는 실제 연립방정식을 푸는것처럼 구상을 해보았다. 
+하지만 사실 이 문제는 x,y가 -999이상 999이하 이므로,  총 경우의수는 2000*2000=4,000,000 이다.
+따라서 그냥 x,y의 순서쌍을 차례대로 넣어보고 답을 구하면 된다.
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+        int d = Integer.parseInt(st.nextToken());
+        int e = Integer.parseInt(st.nextToken());
+        int f = Integer.parseInt(st.nextToken());
+        for (int x = -999; x <= 999; x++) {
+            for (int y = -999; y <= 999; y++){
+                if(a*x+b*y==c & d*x+e*y==f){
+                    System.out.println(x+" "+y);
+                    break;
+                }
+            }
+
+        }
+    }
+
+}

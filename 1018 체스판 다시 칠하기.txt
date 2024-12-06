@@ -1,0 +1,103 @@
+1018 체스판 다시 칠하기
+
+MxN 크기의 보드가 주어지고 그중 8x8 크기로 잘라낸 후에 몇개의 정사각형을 다시 칠하여 체스판을 만든다.
+이때 다시 칠해야하는 최소 개수를 구하는 문제이다.
+
+n,m은 50보다 작거나 같으므로 8바이8 크기로 잘라내는 경우의 수는 42*42=1764
+그 잘라낸 보드를 확인하여 다시 칠하는 경우의 수는 8*8=64 이므로
+총 경우의 수는 112,896이므로 모든 경우의 수를 확인해봐도 된다.
+
+
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+class Main {
+
+    static char[][] arr;
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        arr = new char[n][m];
+
+        for (int i = 0; i < n; i++) {
+            String input = br.readLine();
+            for (int j = 0; j < m; j++) {
+                arr[i][j] = input.charAt(j);
+            }
+        }
+	
+	//무조건 답이 나오기때문에 우선 최대값으로 설정해준다.
+        int answer = Integer.MAX_VALUE;
+	
+	//잘라내는 8x8보드 시작 지점
+        for (int i = 0; i <= n - 8; i++) {
+            for (int j = 0; j <= m - 8; j++) {
+                answer = Math.min(answer, Math.min(startWhite(i, j), startBlack(i, j)));
+            }
+        }
+        System.out.println(answer);
+
+    }
+
+    static int startWhite(int x, int y) {
+        int sum = 0;
+        for (int i = x; i < x+8; i++) {
+            for (int j = y; j < y+8; j++) {
+                if (i % 2 == 0 && j % 2 == 0) {
+                    if (arr[i][j] != 'W') {
+                        sum++;
+                    }
+                } else if (i % 2 != 0 && j % 2 == 0) {
+                    if (arr[i][j] != 'B') {
+                        sum++;
+                    }
+                } else if (i % 2 == 0 && j % 2 != 0) {
+                    if (arr[i][j] != 'B') {
+                        sum++;
+                    }
+                } else {
+                    if (arr[i][j] != 'W') {
+                        sum++;
+                    }
+                }
+            }
+        }
+
+        return sum;
+    }
+
+    static int startBlack(int x, int y) {
+        int sum = 0;
+        for (int i = x; i < x+8; i++) {
+            for (int j = y; j < y+8; j++) {
+                if (i % 2 == 0 && j % 2 == 0) {
+                    if (arr[i][j] != 'B') {
+                        sum++;
+                    }
+                } else if (i % 2 == 0 && j % 2 != 0) {
+                    if (arr[i][j] != 'W') {
+                        sum++;
+                    }
+                } else if (i % 2 != 0 && j % 2 == 0) {
+                    if (arr[i][j] != 'W') {
+                        sum++;
+                    }
+
+                } else {
+                    if (arr[i][j] != 'B') {
+                        sum++;
+                    }
+                }
+            }
+        }
+
+        return sum;
+    }
+}
