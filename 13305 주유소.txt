@@ -1,0 +1,47 @@
+13305 주유소
+
+도시의 개수 n이 주어지고 각도시 사이의 거리가 주어지고 각도시의 주유소의 리터당 가격이 주어진다.
+
+처음도시에서는 최소한 다음도시로 가는 기름은 필요하다.
+현재 도시에서 가격과 뒤에있는 도시의 가격을 비교해서 현재가 더 싼경우 그다음도시 까지의 기름을 구매해준다
+
+
+도시사이 거리가 1,000,000,000이하이고
+int의 범위는 대략 +-2,000,000,000정도이기에 
+도시가3개이상만 되면 int범위를 넘어가게 되므로 long을 사용해야 한다
+
+
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+        int cnt = Integer.parseInt(br.readLine());
+        long[] distance = new long[cnt-1];
+        long[] cost = new long[cnt];
+		
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i=0; i<cnt-1; i++) {
+            distance[i] = Integer.parseInt(st.nextToken());
+        }
+
+        st = new StringTokenizer(br.readLine());
+        for (int i=0; i<cnt; i++) {
+            cost[i] = Integer.parseInt(st.nextToken());
+        }
+        
+        long sum = cost[0] * dist[0];
+        long curMinCost = cost[0];
+        
+        for (int i=1; i<cnt-1; i++) {
+            // 다음 도시에서 기름값이 더 싸면 기름값 변경
+            if (curMinCost > cost[i]) {
+			curMinCost = cost[i];
+	    }
+            
+            sum += curMinCost * distance[i];
+        }
+		
+        System.out.println(sum);
+    }	
+}

@@ -1,0 +1,43 @@
+1541 잃어버린 괄호
+
++ - 로 이루어진 식에서 괄호를 사용해 최솟값이 나오도록 하는 문제이다.
+-를 해줄때 큰값으로 해주면 된다. 따라서 -가 나오면 뒤를 묶어주면 된다.
+
++는 정규식 표현이기때문에, \\로 이스케이프처리
+
+4+5+2-3+3 - 3+7
+
+4+5+2  -   3+3   -  3+7
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] splitBySub = br.readLine().split("-");
+        int result = 0 ;
+        
+        for(int i = 0; i < splitBySub.length; i++) {
+            int group=0;
+            
+            String[] add = splitBySub[i].split("\\+");
+            
+            for(int j=0;j<add.length;j++){
+                group+= Integer.parseInt(add[j]);
+            }
+            if(i==0){
+                result += group;
+            }else{
+                result -= group;
+            }
+        }
+        System.out.println(result);
+    }
+
+}

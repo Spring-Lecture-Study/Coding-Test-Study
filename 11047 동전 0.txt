@@ -1,0 +1,47 @@
+11047 동전 0
+n종류의 동전이 무제한으로 있을때 동전을 조합하여 합을 k로 만든다. 그때 필요한 동전의 개수의 최솟값을 구하는 문제
+
+(1 ≤ Ai ≤ 1,000,000, A1 = 1, i ≥ 2인 경우에 Ai는 Ai-1의 배수)
+큰동전은 작은 동전의 배수라는 조건이 있기 때문에 큰동전 하나가 작은동전 여러개를 대체할 수 있다.
+따라서 같은 가격일때 무조건 큰동전으로 사는게 좋다.
+ex) 합이 1000원일 경우 100,500,1000 짜리 동전이 있으면 100원 10장 보다 1000원 한장이 낫다.
+
+배수라는 조건이 없었다면 무조건 큰단위 동전으로 하면 안된다.
+ex) 합 2100원 일 경우 100, 700, 800 짜리 동전이 있으면, 
+	큰 동전부터 배치하면 800x2 100x5 로 총 7개이지만
+	700x3 로 총 3개로 조합이 가능하다.
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(br.readLine());
+        }
+
+        int ans=0;
+        for (int i = n - 1; i >= 0; i--) {
+            ans+=k/a[i];
+            k%=a[i];
+        }
+        System.out.println(ans);
+
+    }
+
+
+}
+
+
+
+
+	
+
+
