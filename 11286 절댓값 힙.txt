@@ -1,0 +1,46 @@
+11286 절댓값 힙
+
+기존 앞문제들과 유사하지만, 이번에는 절대값을 기준으로 반환해줘야한다.
+다시말해 절대값이 작은 값부터 출력한다.
+
+따라서 priorityQueue를 재정의 해줘야한다.
+
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+
+        PriorityQueue<Integer> heap = new PriorityQueue<>((o1, o2) -> {
+            int abs1 = Math.abs(o1);
+            int abs2 = Math.abs(o2);
+
+            if (abs1 == abs2) {
+                if (o1 > o2) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+            return (abs1 - abs2);
+        });
+
+        for (int i = 0; i < n; i++) {
+            int x = Integer.parseInt(br.readLine());
+
+            if (x == 0) {
+                if(heap.isEmpty()){
+                    System.out.println(0);
+                    continue;
+                }
+                System.out.println(heap.poll());
+                continue;
+            }
+            heap.add(x);
+        }
+    }
+}
