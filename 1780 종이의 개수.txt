@@ -1,0 +1,69 @@
+1780 종이의 개수
+
+이거는 기존 색종이 문제와 동일하지만, 이번엔 -1,0,1 이라는 숫자가 있고 통일되지 않은경우 9등분을 한다.
+
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    static int[][] paper;
+    static int minusOne, zero, one = 0;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br =  new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+
+        paper = new int[n][n];
+
+        for(int i = 0; i < n; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for(int j = 0; j < n; j++){
+                paper[i][j] = Integer.parseInt(st.nextToken()); 
+            }
+        }
+
+
+        cutPaper(0, 0, n);
+
+        System.out.println(minusOne);
+        System.out.println(zero);
+        System.out.println(one);
+    }
+
+    static void cutPaper(int row, int col, int size){
+
+        if(checkPaper(row, col, size)){ 
+            if(paper[row][col] == -1){ 
+                minusOne++;
+            }else if(paper[row][col] == 0){ 
+                zero++;
+            }else if(paper[row][col] == 1){ 
+                one++;
+            }
+        }else { 
+            int newSize = size / 3; 
+
+            for (int x = 0; x < size; x += newSize) { 
+                for (int y = 0; y < size; y += newSize) {
+                    cutPaper(row + x, col + y, newSize);
+                }
+            }
+        }
+    }
+
+    static boolean checkPaper(int row, int col, int size){
+        int data = paper[row][col]; 
+
+        for(int i = row; i < row+size; i++){
+            for(int j = col; j < col+size; j++){
+                if(paper[i][j] != data){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}

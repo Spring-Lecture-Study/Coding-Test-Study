@@ -1,0 +1,51 @@
+15651 n과m (3)
+
+이문제도 유사한 문제이다. 조건에서 다른 부분은 같은수를 여러번 골라도 된다는점이다.
+따라서 그냥 기존에 중복을 방지하기위해 트래킹했던부분을 지우면 된다.
+사실 그냥 반복문으로도 풀수있지 않을까 했지만, 깊이가 주어지기 때문에 반복문은 번거로웠다.
+
+시간복잡도는 연산횟수를 기반으로 계산된다. 하지만 출력은 I/O 연산으로 cpu와 별개로, 디스크,네트워크,콘솔
+등 외부자원과의 상호작용이 포함된다. 따라서 println 즉 출력이 많으면 시간복잡도와 관계없이 시간초과가 나올수있다.
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+
+public class Main {
+    static int[] ans;
+    static int m;
+    static int n;
+    static StringBuilder sb;
+    static boolean[] visited;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        ans = new int[m];
+        sb=new StringBuilder();
+        dfs(0);
+        System.out.print(sb);
+    }
+
+    public static void dfs(int depth) {
+        if (depth == m) {
+            for (int a : ans) {
+                sb.append(a).append(" ");
+            }
+            sb.append("\n");
+            return;
+        }
+        for (int i = 1; i < n + 1; i++) {
+            ans[depth]=i;
+            dfs(depth+1);
+        }
+    }
+}
+}

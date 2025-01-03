@@ -1,0 +1,51 @@
+15649 n과m (1)
+
+자연수 N과 M이 주어졌을 때, 1부터 n까지 자연수중에 중복없이 M개를 고른 수열을 모두 구하는 문제입니다.
+처음에 브루트포스 즉 모든 경우의 수를 구하는 방식으로 풀기위해 어떠한 접근을 하면 좋을 지 생각 해보았지만
+떠오르지 않아 찾아보고 해결하였다.
+백트래킹을 사용하여 풀이를 해야한다
+재귀함수를 이용하여, depth즉 수열에 넣은 값의 개수를 트래킹해줍니다. 그리고 숫자가 중복되면 안되기 때문에
+사용했던 숫자를 트레킹하여 visited에 표시해줍니다.
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class Main {
+    static boolean[] visited;
+    static int[] ans;
+    static int m;
+    static int n;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+
+        visited=new boolean[n+1];
+        ans = new int[m];
+        dfs(1,0);
+    }
+
+    public static void dfs(int s, int depth){
+        if(depth==m){
+            for(int a : ans){
+                System.out.print(a+" ");
+            }
+            System.out.println();
+            return;
+        }
+        for(int i=1;i<n+1;i++){
+            if(!visited[i]){
+                visited[i]=true;
+                ans[depth]=i;
+                dfs(i+1,depth+1);
+// dfs를 빠져나오면 다시 false로 바꿔준다.
+                visited[i]=false;
+            }
+        }
+    }
+
+}
